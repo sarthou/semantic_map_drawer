@@ -215,7 +215,7 @@ int MapDrawer::getPreviousFix(std::vector<rect_t> rects, size_t pose)
 
 cv::Scalar MapDrawer::getColor(std::string name)
 {
-  std::vector<std::string> up = onto_.string2vector(onto_.getUp(name));
+  std::vector<std::string> up = onto_.getUp(name);
 
   if(std::find(up.begin(), up.end(), "interface") != up.end())
     return cv::Scalar(255, 100, 0);
