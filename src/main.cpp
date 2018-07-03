@@ -25,6 +25,7 @@ int main(int argc, char** argv)
   reader.getMap();
   MapDrawer drawer(&n);
   drawer.draw(reader.corridors());
+  drawer.draw(reader.openspaces());
 
   ROS_DEBUG("KILL semantic_route_drawer");
 

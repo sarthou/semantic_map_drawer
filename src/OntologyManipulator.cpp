@@ -160,7 +160,7 @@ std::vector<std::string> OntologyManipulator::getRelatedFrom(const std::string& 
 std::vector<std::string> OntologyManipulator::getType(const std::string& name)
 {
   std::vector<std::string> res;
-  ros::ServiceClient client = n_->serviceClient<ontologenius::OntologeniusService>("ontoloGenius/individual");
+  ros::ServiceClient client = n_->serviceClient<ontologenius::OntologeniusService>("ontologenius/individual");
 
   ontologenius::OntologeniusService srv;
   srv.request.action = "getType";
@@ -176,7 +176,7 @@ std::vector<std::string> OntologyManipulator::getType(const std::string& name)
 
 bool OntologyManipulator::close()
 {
-  ros::ServiceClient client = n_->serviceClient<ontologenius::OntologeniusService>("ontoloGenius/actions");
+  ros::ServiceClient client = n_->serviceClient<ontologenius::OntologeniusService>("ontologenius/actions");
   ontologenius::OntologeniusService srv;
   srv.request.action = "close";
 

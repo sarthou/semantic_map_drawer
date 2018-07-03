@@ -46,6 +46,7 @@ public:
   ~MapDrawer(){}
 
   void draw(std::vector<corridor_t> corridors);
+  void draw(std::vector<openspace_t> openspaces);
 
 private:
   ros::NodeHandle* n_;
@@ -53,6 +54,8 @@ private:
 
   IplImage* image;
   std::vector<drawCorridor_t> corridors_;
+
+  corridor_t openspace2corridor(openspace_t openspace);
 
   void drawOneCorridor(corridor_t corridor);
   void set_rect(rect_t rect, std::string name);

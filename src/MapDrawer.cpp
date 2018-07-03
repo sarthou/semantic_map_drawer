@@ -7,6 +7,47 @@ void MapDrawer::draw(std::vector<corridor_t> corridors)
     drawOneCorridor(corridors[i]);
 }
 
+void MapDrawer::draw(std::vector<openspace_t> openspaces)
+{
+  for(size_t i = 0; i < openspaces.size(); i++)
+    drawOneCorridor(openspace2corridor(openspaces[i]));
+}
+
+corridor_t MapDrawer::openspace2corridor(openspace_t openspace)
+{
+  corridor_t res;
+  size_t half = openspace.around_.size() / 2;
+  std::vector<std::string> side_I, side_II;
+
+  for(size_t i = 0; i < half; i++)
+    side_I.push_back(openspace.around_[i]);
+  for(size_t i = half; i < openspace.around_.size(); i++)
+    side_II.push_back(openspace.around_[i]);
+
+  std::vector<std::string> side_1, side_2, side_3, side_4;
+  half = side_I.size() / 2;
+  for(size_t i = 0; i < half; i++)
+    side_1.push_back(side_I[i]);
+  for(size_t i = half; i < side_I.size(); i++)
+    side_2.push_back(side_I[i]);
+  half = side_II.size() / 2;
+  for(size_t i = 0; i < half; i++)
+    side_3.push_back(side_II[i]);
+  for(size_t i = half; i < side_II.size(); i++)
+    side_4.push_back(side_II[i]);
+
+  res.name_ = openspace.name_;
+  res.in_front_of_ = openspace.in_front_of_;
+  res.at_end_edge_ = side_1;
+  std::reverse(side_2.begin(),side_2.end());
+  res.at_right_ = side_2;
+  std::reverse(side_3.begin(),side_3.end());
+  res.at_begin_edge_ = side_3;
+  res.at_left_ = side_4;
+
+  return res;
+}
+
 void MapDrawer::drawOneCorridor(corridor_t corridor)
 {
   size_t nb_places = 0;
@@ -223,6 +264,8 @@ cv::Scalar MapDrawer::getColor(std::string name)
     return cv::Scalar(0, 160, 255);
   else if(std::find(up.begin(), up.end(), "clothes_shop") != up.end())
     return cv::Scalar(0, 0, 255);
+  else if(std::find(up.begin(), up.end(), "pathIntersection") != up.end())
+    return cv::Scalar(60, 170, 60);
   else
     return cv::Scalar(255, 150, 150);
 }
