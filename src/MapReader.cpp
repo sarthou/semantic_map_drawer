@@ -121,33 +121,33 @@ std::vector<std::string> MapReader::orderPlaces(std::vector<std::string> base, b
 {
   std::vector<std::string> along = base;
   std::vector<std::string> ordered;
-  
+
   size_t max_time = base.size();
   for(size_t timeout = 0; (timeout < max_time) && (base.size() != 0); timeout++)
     for(size_t i = 0; i < base.size();)
     {
       std::vector<std::string> atLeft = onto_.getOn(base[i], "isAtRightOf");
 
-      if(atLeft.size() == 0)
+      if((atLeft.size() == 0) || ((timeout == 1) && (base.size() == along.size())))
       {
         ordered.insert(ordered.begin(), base[i]);
         base.erase(base.begin() + i);
       }
       else
       {
-        bool hasOneAtLeft = false;
+        int atLeftIndex = -1;
         for(size_t left_i = 0; left_i < atLeft.size(); left_i++)
           if(std::find(along.begin(), along.end(), atLeft[left_i]) != along.end())
-            hasOneAtLeft = true;
+            atLeftIndex = left_i;
 
-        if(hasOneAtLeft == false)
+        if(atLeftIndex == -1)
         {
           ordered.insert(ordered.begin(), base[i]);
           base.erase(base.begin() + i);
         }
         else
         {
-          std::vector<std::string>::iterator it = std::find(ordered.begin(), ordered.end(), atLeft[0]);
+          std::vector<std::string>::iterator it = std::find(ordered.begin(), ordered.end(), atLeft[atLeftIndex]);
           if(it != ordered.end())
           {
             ordered.insert(it + 1, base[i]);

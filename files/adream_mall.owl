@@ -249,7 +249,7 @@
         <rdf:type rdf:resource="http://www.semanticweb.org/gsarthou/ontologies/2018/place_description#door"/>
         <adream_mall:isAlong rdf:resource="http://www.semanticweb.org/gsarthou/ontologies/2018/adream_mall#os_exp_1"/>
         <place_description:isAtEndEdgeOfPath rdf:resource="http://www.semanticweb.org/gsarthou/ontologies/2018/adream_mall#gf_walkway_1"/>
-        <place_description:isAtRightOf rdf:resource="http://www.semanticweb.org/gsarthou/ontologies/2018/adream_mall#marimekko_outlet"/>
+        <place_description:hasAtLeft rdf:resource="http://www.semanticweb.org/gsarthou/ontologies/2018/adream_mall#marimekko_outlet"/>
         <rdfs:label xml:lang="en">door</rdfs:label>
     </owl:NamedIndividual>
 
