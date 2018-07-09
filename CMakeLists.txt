@@ -10,6 +10,7 @@ add_compile_options(-std=c++11)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   std_msgs
+  ontologenius
 )
 find_package(ontologenius 0.1.1 REQUIRED)
 find_package(OpenCV REQUIRED)
@@ -52,12 +53,11 @@ add_library(semantic_drawer_lib
   src/MapReader.cpp
   src/MapDrawer.cpp
 )
+ target_link_libraries(semantic_drawer_lib ${catkin_LIBRARIES})
  add_dependencies(semantic_drawer_lib ${catkin_EXPORTED_TARGETS})
  target_link_libraries(semantic_drawer_lib ${OpenCV_LIBS})
 
 add_executable(semantic_drawer src/main.cpp)
- target_link_libraries(semantic_drawer
-   ${catkin_LIBRARIES}
- )
+target_link_libraries(semantic_drawer ${catkin_LIBRARIES})
 add_dependencies(semantic_drawer ${catkin_EXPORTED_TARGETS})
 target_link_libraries(semantic_drawer semantic_drawer_lib)
