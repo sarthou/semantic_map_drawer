@@ -12,7 +12,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   ontologenius
 )
-find_package(ontologenius 0.1.1 REQUIRED)
+find_package(ontologenius 0.1.3 REQUIRED)
 find_package(OpenCV REQUIRED)
 
 ## System dependencies are found with CMake's conventions
@@ -45,17 +45,18 @@ include_directories(
  include
   ${catkin_INCLUDE_DIRS}
   ${OpenCV_INCLUDE_DIRS}
+  ${ontoloGenius_lib_INCLUDE_DIRS}
 )
 
 ## Declare a C++ library
 add_library(semantic_drawer_lib
-  src/OntologyManipulator.cpp
   src/MapReader.cpp
   src/MapDrawer.cpp
 )
  target_link_libraries(semantic_drawer_lib ${catkin_LIBRARIES})
  add_dependencies(semantic_drawer_lib ${catkin_EXPORTED_TARGETS})
  target_link_libraries(semantic_drawer_lib ${OpenCV_LIBS})
+ target_link_libraries(semantic_drawer_lib ontoloGenius_lib)
 
 add_executable(semantic_drawer src/main.cpp)
 target_link_libraries(semantic_drawer ${catkin_LIBRARIES})

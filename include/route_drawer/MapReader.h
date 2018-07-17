@@ -6,7 +6,7 @@
 #include <map>
 
 #include "ros/ros.h"
-#include "route_drawer/OntologyManipulator.h"
+#include "ontoloGenius/utility/OntologyManipulator.h"
 
 struct corridor_t
 {
